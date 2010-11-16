@@ -1,0 +1,27 @@
+<h1>Tic Tac Toe Game</h2>
+<center>
+<h1>
+<input type="button" value="New Game" onclick="window.location.href='{% url start_game %}'"/>
+</h1>
+</center>
+
+<hr/>
+{% for row in board.asMatrix %}
+    <div>
+    {% for cell in row %}
+        {% if cell == ' '%}
+            <span>
+                <input type="button" value="X"
+                       onclick="window.location.href='{% url save_x board.id forloop.parentloop.counter0 forloop.counter0 %}'"/>
+           </span>
+        {% endif %}
+        {% if cell == 'X' %}
+            <span>X</span>
+        {% endif %}
+        {% if cell == 'O' %}
+            <span>O</span>
+        {% endif %}
+
+    {% endfor %}
+    </div>
+{% endfor %}

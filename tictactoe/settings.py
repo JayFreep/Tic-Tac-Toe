@@ -1,20 +1,24 @@
 # Django settings for tictactoe project.
 
+import os
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+SERVER_ROOT = os.path.join(os.getcwd(), os.path.dirname(__file__))
+
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Jay O''Connor', 'jayfreep@gmail.com'),
 )
 
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'tictactoe',                      # Or path to database file if using sqlite3.
+        'USER': 'tictactoe',                      # Not used with sqlite3.
+        'PASSWORD': 'tictactoe',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -100,6 +104,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    SERVER_ROOT + '/templates',    
 )
 
 INSTALLED_APPS = (
@@ -113,6 +118,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'tictactoe.ttt',
 )
 
 # A sample logging configuration. The only tangible logging
