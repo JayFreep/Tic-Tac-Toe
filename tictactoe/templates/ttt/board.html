@@ -1,18 +1,32 @@
 <h1>Tic Tac Toe Game</h2>
 <center>
 <h1>
+{% if winner == 'user' %}
+<p>You Have Won!!!!</p>
+{% endif %}
+{% if winner == 'computer' %}
+<p>Computer Won!!!!</p>
+{% endif %}
+{% if noMoves %}
+<p>No More Moved</p>
+{% endif %}
+
 <input type="button" value="New Game" onclick="window.location.href='{% url start_game %}'"/>
 </h1>
 </center>
 
 <hr/>
-{% for row in board.asMatrix %}
+{% for row in board.asArray %}
     <div>
     {% for cell in row %}
         {% if cell == ' '%}
             <span>
+                {% if not winner %}
                 <input type="button" value="X"
                        onclick="window.location.href='{% url save_x board.id forloop.parentloop.counter0 forloop.counter0 %}'"/>
+                 {% else %}
+                 -
+                 {% endif %}
            </span>
         {% endif %}
         {% if cell == 'X' %}
