@@ -8,7 +8,7 @@
 <p>Computer Won!!!!</p>
 {% endif %}
 {% if noMoves %}
-<p>No More Moved</p>
+<p>No More Moves</p>
 {% endif %}
 
 <input type="button" value="New Game" onclick="window.location.href='{% url start_game %}'"/>
@@ -16,8 +16,9 @@
 </center>
 
 <hr/>
+<center>
 {% for row in board.asArray %}
-    <div>
+    <div style="width:100px">
     {% for cell in row %}
         {% if cell == ' '%}
             <span>
@@ -39,3 +40,4 @@
     {% endfor %}
     </div>
 {% endfor %}
+    </center>

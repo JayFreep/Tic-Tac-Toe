@@ -25,9 +25,11 @@ def saveUserX(request, boardId, row, col):
     
     if board.setUserX(int(row), int(col)):
         winner='user'
-        
-    if board.computerPick():
-        winner='computer'
+    noMoves = board.noMoves()
+    
+    if not winner and not noMoves:
+        if board.computerPick():
+            winner='computer'
         
     board.save()
     noMoves = board.noMoves()

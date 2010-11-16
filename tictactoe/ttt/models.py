@@ -1,7 +1,7 @@
 from django.db import models
 
 from django.contrib.auth.models import User
-from computer import computerPick
+from computer import Computer
 
 class Board(models.Model):
     matrix = models.CharField(max_length=9, default="         ")
@@ -11,16 +11,33 @@ class Board(models.Model):
 
     def pos (self, row, col):
         return row * 3 + col
+
+    def setPos(self, row, col, symbol):
+        pos = self.pos (row, col)
+        self.setPosIndex(pos, symbol)
+
+    def setPosIndex(self, index, symbol):
+        tmp = list (self.matrix)
+        tmp[index] = symbol
+        self.matrix = ''.join(tmp)
+        
+    def canPlace(self, row, col):
+        return self.canPlaceIndex(self.pos(row, col))
+    
+    def canPlaceIndex (self, index):
+        return self.matrix[index] == ' '        
     
     def setUserX(self, row, col):
-        pos = self.pos (row, col)
-        tmp = list (self.matrix)
-        tmp[pos] = 'X'
-        self.matrix = ''.join(tmp)
+        self.setPos(row,col, 'X')
         return self.checkForWinner('X')
 
+    def setComputerO(self, row, col):
+        self.setPos(row,col, 'O')
+        return self.checkForWinner('O')
+
+
     def computerPick(self):
-        computerPick(self)
+        Computer().computerPick(self)
         return self.checkForWinner('O')
 
     def noMoves(self):
@@ -41,7 +58,7 @@ class Board(models.Model):
             if col == match:
                 return True
 
-        #check diagnols
+        #check diagnals
         center = self.matrix[4]
         if not center == symbol:
             return False
